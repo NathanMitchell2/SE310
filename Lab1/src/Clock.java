@@ -4,14 +4,17 @@ public class Clock {
 
     public Clock(Time currentTime){
         this.currentTime = currentTime;
-
     }
 
-    public Time getCurrentTime(){
-        return this.currentTime;
+    public String getCurrentTime(){
+        return currentTime.getHour()+":"+String.format("%02d", currentTime.getMinute())+":"+String.format("%02d", currentTime.getSecond())+" "+currentTime.getMeridiem();
     }
 
     public void setTime(Time newTime){
-        this.currentTime = newTime;
+        currentTime = newTime;
+    }
+
+    public void tick() {
+        currentTime.tick();
     }
 }
