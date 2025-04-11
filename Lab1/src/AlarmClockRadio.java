@@ -10,27 +10,21 @@ public class AlarmClockRadio {
 
         System.out.println("AlarmClockRadio 5000 is on and is playing "+ myRadio.getCurrentRadioStation());
         System.out.println("Current time: "+myAlarmClock.getCurrentTime());
-        for (i = 0; i < 5; i++)
-        {
-            for (seconds = 0; seconds < 60; seconds++)
-            {
+
+        while(!myAlarmClock.isAlarmTime()) {
                 myAlarmClock.tick();
                 System.out.println(myAlarmClock.getCurrentTime());
-                myAlarmClock.checkAlarm();
-
-            }
         }
+
+        System.out.println("The radio is playing "+myRadio.getCurrentRadioStation());
         myAlarmClock.snooze();
-        for (i = 0; i < 9; i++)
-        {
-            for (seconds = 0; seconds < 60; seconds++)
-            {
+
+        while(!myAlarmClock.isAlarmTime()) {
                 myAlarmClock.tick();
                 System.out.println(myAlarmClock.getCurrentTime());
-                myAlarmClock.checkAlarm();
-
-            }
         }
+
+        System.out.println("The radio is playing "+myRadio.getCurrentRadioStation());
         myAlarmClock.turnAlarmOff();
         myRadio.turnRadioOff();
     }

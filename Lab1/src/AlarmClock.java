@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class AlarmClock extends Clock{
     protected Time alarmTime;
     protected boolean isAlarmOn;
@@ -42,9 +40,7 @@ public class AlarmClock extends Clock{
         }
         setAlarm((new Time(newHour, newMinute, 0, "AM")));
     }
-    public void checkAlarm(){
-        if(isAlarmOn && currentTime.getMeridiem().equals(alarmTime.getMeridiem()) && currentTime.getFullTime().equals(alarmTime.getFullTime())){
-            System.out.println("Buz Buz Buz");
-        }
+    public boolean isAlarmTime(){
+        return isAlarmOn && currentTime.getMeridiem().equals(alarmTime.getMeridiem()) && currentTime.getFullTime().equals(alarmTime.getFullTime());
     }
 }
