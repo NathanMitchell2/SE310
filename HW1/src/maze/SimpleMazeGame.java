@@ -80,13 +80,13 @@ public class SimpleMazeGame
 		Maze maze = new Maze();
 		File file = new File(path);
 		Scanner reader = new Scanner(file);
-		HashMap<String, ArrayList<String>> roomMap = new HashMap<String, ArrayList<String>>();
-		HashMap<String, Door> doorMap = new HashMap<String, Door>();
+		HashMap<String, ArrayList<String>> roomMap = new HashMap<>();
+		HashMap<String, Door> doorMap = new HashMap<>();
 		while(reader.hasNextLine()){
 			String[] line = reader.nextLine().split(" ");
 			if (line[0].equals("room")) {
 				maze.addRoom(new Room(Integer.parseInt(line[1])));
-                ArrayList<String> sides = new ArrayList<String>(Arrays.asList(line).subList(2, 5));
+                ArrayList<String> sides = new ArrayList<String>(Arrays.asList(line).subList(2, 6));
 				roomMap.put(line[1], sides);
 			}
 			else {
@@ -106,17 +106,21 @@ public class SimpleMazeGame
 				else if (value.get(i).startsWith("d")) {
 					maze.getRoom(Integer.parseInt(key)).setSide(direction, doorMap.get(value.get(i)));
 				}
-
+				else {
+					maze.getRoom(Integer.parseInt(key)).setSide(direction, maze.getRoom(Integer.parseInt(value.get(i))));
+				}
+				i++;
 			}
 		}
+		maze.setCurrentRoom(0);
 		reader.close();
 		return maze;
 	}
 
 	public static void main(String[] args) throws Exception
 	{
-		Maze maze = loadMaze("small.maze");
-	    //MazeViewer viewer = new MazeViewer(maze);
-	    //viewer.run();
+		Maze maze = loadMaze("large.maze");
+	    MazeViewer viewer = new MazeViewer(maze);
+	    viewer.run();
 	}
 }
