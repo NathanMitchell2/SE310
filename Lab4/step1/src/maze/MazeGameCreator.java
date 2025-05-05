@@ -38,31 +38,44 @@ import java.util.*;
  * @version 1.0
  * @since 1.0
  */
-public class SimpleMazeGame
+public class MazeGameCreator
 {
+
 	/**
 	 * Creates a small maze.
 	 */
-	public static Maze createMaze()
+	public  Wall makeWall() {
+		return new Wall();
+	}
+
+	public  Room makeRoom(int roomNumber){
+		return new Room(roomNumber);
+	}
+
+	public  Door makeDoor(Room r1, Room r2) {
+		return new Door(r1, r2);
+	}
+
+	public Maze createMaze()
 	{
 		
 		Maze maze = new Maze();
 
-		Room r0 = new Room(0);
+		Room r0 = makeRoom(0);
 
-		r0.setSide(Direction.North, new Wall());
-		r0.setSide(Direction.South, new Wall());
-		r0.setSide(Direction.West, new Wall());
+		r0.setSide(Direction.North, makeWall());
+		r0.setSide(Direction.South, makeWall());
+		r0.setSide(Direction.West, makeWall());
 		maze.addRoom(r0);
 
-		Room r1 = new Room(1);
+		Room r1 = makeRoom(1);
 
-		r1.setSide(Direction.North, new Wall());
-		r1.setSide(Direction.South, new Wall());
-		r1.setSide(Direction.East, new Wall());
+		r1.setSide(Direction.North, makeWall());
+		r1.setSide(Direction.South, makeWall());
+		r1.setSide(Direction.East, makeWall());
 		maze.addRoom(r1);
 
-		Door door = new Door(r0, r1);
+		Door door = makeDoor(r0, r1);
 
 		r0.setSide(Direction.East, door);
 		r1.setSide(Direction.West, door);
@@ -75,7 +88,7 @@ public class SimpleMazeGame
 
 	}
 
-	public static Maze loadMaze(final String path) throws Exception
+	public Maze loadMaze(final String path) throws Exception
 	{
 		Maze maze = new Maze();
 		File file = new File(path);
@@ -85,12 +98,12 @@ public class SimpleMazeGame
 		while(reader.hasNextLine()){
 			String[] line = reader.nextLine().split(" ");
 			if (line[0].equals("room")) {
-				maze.addRoom(new Room(Integer.parseInt(line[1])));
+				maze.addRoom(makeRoom(Integer.parseInt(line[1])));
                 ArrayList<String> sides = new ArrayList<String>(Arrays.asList(line).subList(2, 6));
 				roomMap.put(line[1], sides);
 			}
 			else {
-				doorMap.put(line[1], new Door(maze.getRoom(Integer.parseInt(line[2])), maze.getRoom(Integer.parseInt(line[3]))));
+				doorMap.put(line[1], makeDoor(maze.getRoom(Integer.parseInt(line[2])), maze.getRoom(Integer.parseInt(line[3]))));
                 doorMap.get(line[1]).setOpen(line[4].equals("open"));
 			}
 
@@ -101,7 +114,7 @@ public class SimpleMazeGame
 			int i = 0;
 			for (Direction direction : Direction.values()){
 				if(value.get(i).equals("wall")) {
-					maze.getRoom(Integer.parseInt(key)).setSide(direction, new Wall());
+					maze.getRoom(Integer.parseInt(key)).setSide(direction, makeWall());
 				}
 				else if (value.get(i).startsWith("d")) {
 					maze.getRoom(Integer.parseInt(key)).setSide(direction, doorMap.get(value.get(i)));
@@ -119,7 +132,33 @@ public class SimpleMazeGame
 
 	public static void main(String[] args) throws Exception
 	{
-		Maze maze = loadMaze("large.maze");
+
+		Scanner input = new Scanner(System.in);  // Create a Scanner object
+		System.out.println("Enter what type of maze you would like to display ");
+		System.out.println("basic, red, blue: ");
+
+		String selection = input.nextLine();  // Read user input
+
+		MazeGameCreator mazeGame;
+		switch (selection){
+
+			case "red":
+				mazeGame = new RedMazeGameCreator();
+				break;
+			case "basic":
+				mazeGame = new MazeGameCreator();
+				break;
+			case "blue":
+				mazeGame = new BlueMazeGameCreator();
+				break;
+			default:
+				mazeGame = new MazeGameCreator();
+
+		}
+
+
+
+		Maze maze = mazeGame.loadMaze("large.maze");
 	    MazeViewer viewer = new MazeViewer(maze);
 	    viewer.run();
 	}
