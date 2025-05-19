@@ -5,10 +5,13 @@ public class DisplaySurvey {
         ArrayList<Question> contents;
         contents = mySurvey.getSurveyContents();
         for(int i = 0; i < contents.size(); i++){
-            int question = i+1;
-            System.out.print(question+") ");
-            contents.get(i).displayQuestion();
+            displayQuestion(contents, i);
 
         }
+    }
+    protected void displayQuestion(ArrayList<Question> contents, int i){
+        int question = i+1;
+        System.out.print(question+") ");
+        contents.get(i).displayQuestion();
     }
 }
