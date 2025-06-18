@@ -38,7 +38,7 @@ import java.util.*;
  * @version 1.0
  * @since 1.0
  */
-public class MazeGameCreator
+abstract class MazeFactory
 {
 
 	/**
@@ -128,38 +128,5 @@ public class MazeGameCreator
 		maze.setCurrentRoom(0);
 		reader.close();
 		return maze;
-	}
-
-	public static void main(String[] args) throws Exception
-	{
-
-		Scanner input = new Scanner(System.in);  // Create a Scanner object
-		System.out.println("Enter what type of maze you would like to display ");
-		System.out.println("basic, red, blue: ");
-
-		String selection = input.nextLine();  // Read user input
-
-		MazeGameCreator mazeGame;
-		switch (selection){
-
-			case "red":
-				mazeGame = new RedMazeGameCreator();
-				break;
-			case "basic":
-				mazeGame = new MazeGameCreator();
-				break;
-			case "blue":
-				mazeGame = new BlueMazeGameCreator();
-				break;
-			default:
-				mazeGame = new MazeGameCreator();
-
-		}
-
-
-
-		Maze maze = mazeGame.loadMaze("large.maze");
-	    MazeViewer viewer = new MazeViewer(maze);
-	    viewer.run();
 	}
 }

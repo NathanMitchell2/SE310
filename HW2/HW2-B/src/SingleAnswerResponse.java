@@ -5,7 +5,7 @@ public class SingleAnswerResponse extends Response{
         return response;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setResponse() {
+        this.response = promptGetter.nextLine();
     }
 }

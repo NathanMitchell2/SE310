@@ -8,6 +8,7 @@ public class TrueFalse extends Question{
     @Override
     void setResponse() {
         BooleanResponse myResponse = new BooleanResponse();
+        myResponse.setResponse();
         questionResponse = myResponse;
     }
 }

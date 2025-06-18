@@ -1,6 +1,9 @@
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Scanner;
-public class MenuSystem {
-    public static void main(String[] args) {
+import java.io.Serializable;
+public class MenuSystem implements Serializable {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner lineReader = new Scanner(System.in);
         boolean loop = true;
         Survey loadedSurvey = null;
@@ -77,12 +80,14 @@ public class MenuSystem {
         modifySurvey.driverDoModify(mySurvey);
     }
 
-    public static void doStore(Survey mySurvey){
-
+    public static void doStore(Survey mySurvey) throws IOException {
+        StoreSurvey storeSurvey = new StoreSurvey();
+        storeSurvey.driverDoStore(mySurvey);
     }
 
-    public static Survey doLoad(){
-        return new Survey();
+    public static Survey doLoad() throws IOException, ClassNotFoundException {
+        LoadSurvey loadSurvey = new LoadSurvey();
+        return loadSurvey.driverDoLoad();
     }
 
     public static void doTake(Survey mySurvey){

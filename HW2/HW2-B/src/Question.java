@@ -1,5 +1,6 @@
 import java.util.Scanner;
-abstract class Question {
+import java.io.Serializable;
+abstract class Question implements Serializable {
     protected String questionPrompt;
     protected Response questionResponse;
     protected Scanner promptGetter = new Scanner(System.in);

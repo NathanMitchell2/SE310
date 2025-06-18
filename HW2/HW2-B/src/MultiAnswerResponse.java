@@ -7,7 +7,13 @@ public class MultiAnswerResponse extends Response{
         return response;
     }
 
-    public void setResponse(ArrayList<String> response) {
-        this.response = response;
+    public void setResponse() {
+        System.out.println("Enter the number of choices for your multiple-choice question.");
+        int choices = promptGetter.nextInt();
+        for (int i = 1; i <= choices; i++){
+            System.out.println("Enter choice #"+i);
+            String newLine = promptGetter.next();
+            response.add(newLine);
+        }
     }
 }

@@ -9,6 +9,7 @@ public class ValidDate extends Question{
     @Override
     void setResponse() {
         SingleAnswerResponse myResponse = new SingleAnswerResponse();
+        myResponse.setResponse();
         questionResponse = myResponse;
     }
 }

@@ -19,6 +19,7 @@ public class MultipleChoice extends Question{
     @Override
     void setResponse() {
         MultiAnswerResponse myResponse = new MultiAnswerResponse();
+        myResponse.setResponse();
         questionResponse = myResponse;
     }
 

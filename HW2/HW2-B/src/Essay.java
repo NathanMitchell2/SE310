@@ -9,7 +9,7 @@ public class Essay extends Question{
     @Override
     void setResponse() {
         MultiAnswerResponse myResponse = new MultiAnswerResponse();
-
+        myResponse.setResponse();
         questionResponse = myResponse;
     }
 

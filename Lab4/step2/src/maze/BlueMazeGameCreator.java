@@ -1,6 +1,6 @@
 package maze;
 
-public class BlueMazeGameCreator extends MazeGameCreator{
+public class BlueMazeGameCreator extends MazeFactory {
     @Override
     public Wall makeWall(){
         return new BlueWall();

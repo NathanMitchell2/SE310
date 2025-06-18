@@ -5,7 +5,7 @@ public class BooleanResponse extends Response{
         return response;
     }
 
-    public void setResponse(boolean response) {
-        this.response = response;
+    public void setResponse() {
+        this.response = promptGetter.nextBoolean();
     }
 }

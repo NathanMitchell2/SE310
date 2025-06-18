@@ -9,6 +9,7 @@ public class Matching extends Question{
     @Override
     void setResponse() {
         MultiAnswerResponse myResponse = new MultiAnswerResponse();
+        myResponse.setResponse();
         questionResponse = myResponse;
     }
 

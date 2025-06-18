@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Survey {
+public class Survey implements Serializable {
     private ArrayList<Question> surveyContents = new ArrayList<>();
 
     public void addQuestion(Question myQuestion){
